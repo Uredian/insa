@@ -4,7 +4,7 @@
  */
 class Poneys
 {
-    private $count = 8;
+    private $count;
 
     /**
      * Retourne le nombre de poneys
@@ -25,9 +25,26 @@ class Poneys
      */
     public function removePoneyFromField(int $number): void
     {
+        if($this->count - $number < 0){
+            throw new Exception("Negative number of poneys");
+        }
         $this->count -= $number;
     }
 
+    public function addPoneyToField(int $number): void
+    {
+        $this->count += $number;
+    }
+
+    public function isFull()
+    {
+        return $this->count == 15 ? TRUE : FALSE;
+    }
+
+    public function setCount(int $count)
+    {
+        $this->count = $count;
+    }
     /**
      * Retourne les noms des poneys
      *

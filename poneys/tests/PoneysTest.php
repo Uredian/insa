@@ -8,21 +8,39 @@ require_once 'src/Poneys.php';
  */
 class PoneysTest extends TestCase
 {
+    private $poneys;
     /**
      * Undocumented function
-     *
+     * @dataProvider dataProvider
      * @return void
      */
-    public function testRemovePoneyFromField()
-    {
-        // Setup
-        $poneys = new Poneys();
 
+    public function testRemovePoneyFromField(int $number, int $expected)
+    {
         // Action
-        $poneys->removePoneyFromField(3);
+        $this->poneys->removePoneyFromField($number);
 
         // Assert
-        $this->assertEquals(5, $poneys->getCount());
+        $this->assertEquals($expected, $this->poneys->getCount());
+    }
+
+    public function dataProvider()
+    {
+        return array(
+            array(2,6),
+            array(1,7)
+        );
+    }
+
+    public function setUp(): void
+    {
+        $this->poneys = new Poneys();
+        $this->poneys->setCount(8);
+    }
+
+    public function tearDown(): void
+    {
+        unset($this->poneys);
     }
 }
 ?>
